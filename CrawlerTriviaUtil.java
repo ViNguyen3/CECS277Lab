@@ -76,7 +76,7 @@ public class CrawlerTriviaUtil{
           int temp = 0;
           for(int i = 0; i < crawlers.size()-1; i++)
           {
-            temp = crawlers.get(i).compareTo(i++); 
+            temp = ((crawlers.get(i)).compareTo(crawlers.get(i++))); 
             if(temp == -1)
             {
               min = i;

@@ -29,7 +29,7 @@ class Main {
 
       System.out.println();
       int temp2 = 0 ;
-
+      
 
       do{
         System.out.println("\n===================================================");
@@ -47,23 +47,36 @@ class Main {
       
         //FIXME: IMPLEMENT THE REST OF THE GAME
         //Checking response 
-        int temp1 = q.checkResponse(response); 
-        if (temp1 != 0)
-        
+        int temp1 = q.checkResponse(response);
         if(temp1 != 0)
         {
           System.out.println("Whatever: " + temp1);
           points += temp1; 
           System.out.println("Your current point: " + Integer.toString(points));
-          temp2 = CrawlerTriviaUtil.getMinCrawler(crawlers).getHp(); 
-          
+          temp2 = (CrawlerTriviaUtil.getMinCrawler(crawlers)).getHp(); 
+          if(points >= temp2)
+          {
+            System.out.println("You have enough points to kill...");
+            System.out.println(CrawlerTriviaUtil.getMinCrawler(crawlers).toString()); 
+            for(int n = 0; n < crawlers.size(); n++)
+            {
+              if (CrawlerTriviaUtil.getMinCrawler(crawlers).equals(crawlers.get(n))) 
+              {
+                crawlers.remove(n);
+                break; 
+              }
+            }
+            CrawlerTriviaUtil.printCrawlers(crawlers);
+
+          }
         }
         else 
         {
           System.out.println("You are wrong");
           System.out.println("The correct one is: " + q.getAnswer()); 
           System.out.println("Clonning"); 
-          CrawlerTriviaUtil.generateClone(crawlers);
+          crawlers.add(CrawlerTriviaUtil.generateClone(crawlers));
+          CrawlerTriviaUtil.printCrawlers(crawlers);
         }
         
       
