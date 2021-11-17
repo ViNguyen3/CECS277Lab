@@ -32,6 +32,11 @@ class Main {
       
 
       do{
+        if(crawlers.size() == 0)
+        {
+          System.out.println("You win !");
+          break; 
+        }
         System.out.println("\n===================================================");
         System.out.println("Question: ");
         Question q;
@@ -58,11 +63,13 @@ class Main {
           {
             System.out.println("You have enough points to kill...");
             System.out.println(CrawlerTriviaUtil.getMinCrawler(crawlers).toString()); 
+           
             for(int n = 0; n < crawlers.size(); n++)
             {
-              if (CrawlerTriviaUtil.getMinCrawler(crawlers).equals(crawlers.get(n))) 
+              if (CrawlerTriviaUtil.getMinCrawler(crawlers).equals(crawlers.get(n)))
               {
-                crawlers.remove(n);
+                points -= crawlers.get(n).getHp();
+                crawlers.remove(n); 
                 break; 
               }
             }
