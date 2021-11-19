@@ -41,16 +41,9 @@ public class CrawlerTriviaUtil{
       public static CreepyCrawler generateClone(ArrayList<CreepyCrawler> crawlers){
         // FIXME: IMPLEMENT THIS METHOD
         Random rand1 = new Random(); 
-        int i = rand1.nextInt(crawlers.size());
-        if(crawlers.get(i) instanceof Centipede)
-        {
-          return crawlers.get(i).clone(); 
-        }
-        else if(crawlers.get(i) instanceof Spider)
-        {
-          return crawlers.get(i).clone();  
-        }
-        return null; 
+        int randCrawler = rand1.nextInt(crawlers.size());
+
+        return crawlers.get(randCrawler); 
       }
 
       /**
@@ -69,24 +62,16 @@ public class CrawlerTriviaUtil{
       @return the min element of the list
       **/
       public static CreepyCrawler getMinCrawler(ArrayList<CreepyCrawler> crawlers){
-          // FIXME: IMPLEMENT THIS METHOD
-          
-          // need to compare crawlers by getHP
           int min = 0;
           int temp = 0;
-          for(int i = 0; i < crawlers.size()-1; i++)
+          for(int i = 0; i < crawlers.size(); i++)
           {
-            temp = ((crawlers.get(i)).compareTo(crawlers.get(i++))); 
+            temp = ((crawlers.get(i)).compareTo(crawlers.get(min))); 
             if(temp == -1)
             {
               min = i;
             }
-            else if (temp == 1)
-            {
-              min = i++; 
-            }
-            else if (temp == 0)
-            {
+            else{
               System.out.println();
             }
           }

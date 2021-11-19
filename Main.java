@@ -53,26 +53,33 @@ class Main {
         //FIXME: IMPLEMENT THE REST OF THE GAME
         //Checking response 
         int temp1 = q.checkResponse(response);
-        if(temp1 != 0)
+        if(temp1 != 0) 
         {
-          System.out.println("Whatever: " + temp1);
+          System.out.println("Correct! You've earned " + temp1);
           points += temp1; 
-          System.out.println("Your current point: " + Integer.toString(points));
+          System.out.println("Your total points: " + Integer.toString(points));
           temp2 = (CrawlerTriviaUtil.getMinCrawler(crawlers)).getHp(); 
           if(points >= temp2)
           {
             System.out.println("You have enough points to kill...");
             System.out.println(CrawlerTriviaUtil.getMinCrawler(crawlers).toString()); 
-           
             for(int n = 0; n < crawlers.size(); n++)
             {
-              if (CrawlerTriviaUtil.getMinCrawler(crawlers).equals(crawlers.get(n)))
+              CreepyCrawler min = CrawlerTriviaUtil.getMinCrawler(crawlers);
+              System.out.println("Minimum: " + min);
+
+              CreepyCrawler current = crawlers.get(n);
+              System.out.println("Current: " + current);     
+
+              if (min.equals(current))
               {
+                System.out.println("index: " + n);
                 points -= crawlers.get(n).getHp();
                 crawlers.remove(n); 
                 break; 
               }
             }
+            System.out.println("Your total points: " + Integer.toString(points));        
             CrawlerTriviaUtil.printCrawlers(crawlers);
 
           }
@@ -80,10 +87,15 @@ class Main {
         else 
         {
           System.out.println("You are wrong");
-          System.out.println("The correct one is: " + q.getAnswer()); 
-          System.out.println("Clonning"); 
+          System.out.println("\nThe correct one is: " + q.getAnswer()); 
+          System.out.println("\nYour incorrect answers led to this crawler's cloning!\n"); 
           crawlers.add(CrawlerTriviaUtil.generateClone(crawlers));
           CrawlerTriviaUtil.printCrawlers(crawlers);
+        }
+
+        if(crawlers.isEmpty()) {
+          System.out.println("\nYou have killed all the crawlers and have escaped the coffin!\nYOU WIN!");
+          break;
         }
         
       
